@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ameca - Associação de Mães Atípicas</title>
+    <style>
+        :root {
+            /* Cores extraídas da Logo AMECA-PB */
+            --primary-color: #005bca;
+            --logo-red: #d32f2f;
+            --logo-green: #43a047;
+            --logo-yellow: #ffb300;
+            
+            --secondary-color: #E2E8F0;
+            --text-main: #2D3748;
+            --text-light: #4A5568;
+            --bg-color: #F7FAFC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        p {
+            text-align: justify;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header-logo {
+            width: 250px;
+            height: 250px;
+            object-fit: contain;
+            background-color: white;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--logo-red), var(--logo-yellow), var(--logo-green), var(--primary-color));
+            border-radius: 2px;
+        }
+
+        .about-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        /* Estrutura para 3 cartões na linha superior e 2 centralizados na inferior */
+        .flex-centered-5 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        .flex-centered-5 > div {
+            flex: 1 1 calc(33.333% - 1.5rem);
+            min-width: 250px;
+            max-width: calc(33.333% - 1rem);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border-bottom: 4px solid transparent;
+        }
+
+        .gallery-item:nth-child(4n+1):hover { border-bottom-color: var(--logo-red); transform: translateY(-5px); }
+        .gallery-item:nth-child(4n+2):hover { border-bottom-color: var(--logo-yellow); transform: translateY(-5px); }
+        .gallery-item:nth-child(4n+3):hover { border-bottom-color: var(--logo-green); transform: translateY(-5px); }
+        .gallery-item:nth-child(4n+4):hover { border-bottom-color: var(--primary-color); transform: translateY(-5px); }
+
+        .img-container {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .item-caption {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .item-title {
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .item-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            text-align: justify;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color), #003b8a);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 4rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .cta-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: var(--logo-yellow);
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+            text-align: center;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--logo-yellow);
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            background-color: #ffd54f;
+        }
+
+        .site-footer {
+            background-color: #00224b;
+            color: white;
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-bottom: 3rem;
+            text-align: left;
+        }
+
+        .footer-col h4 {
+            color: var(--logo-yellow);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--logo-yellow);
+        }
+
+        .footer-logo {
+            width: 120px;
+            background: white;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: #E2E8F0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--logo-yellow);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 3rem 1rem; }
+            header h1 { font-size: 2rem; }
+            .about-section { padding: 2rem 1rem; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .flex-centered-5 > div { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="logo.jpg" alt="Logo AMECA-PB" class="header-logo">
+        <h1>Ameca</h1>
+        <p>Associação de Mães Atípicas de Poço Branco RN</p>
+        <p style="margin-top: 10px; font-size: 1rem; font-style: italic;">O Cuidado em Rede Transformando Vidas</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- Seção Sobre Nós -->
+        <section id="sobre" class="about-section">
+            <h2 class="section-title" style="margin-bottom: 2rem;">Sobre nós</h2>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem; text-align: left;">
+                <div style="background: #F0F4F8; padding: 2rem; border-radius: 8px; border-left: 5px solid var(--primary-color);">
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.4rem;">Nossa Missão</h3>
+                    <p style="font-size: 1.05rem; color: var(--text-light); margin: 0; text-align: justify;">
+                        Oferecer cuidado em rede, suporte integral e atendimentos especializados para crianças atípicas, seus familiares e responsáveis em Poço Branco. Atuar por meio de orientação e suporte multidisciplinar para promover a inclusão prática, o desenvolvimento global e um ambiente de cuidado especializado.
+                    </p>
+                </div>
+                
+                <div style="background: #FFFaf0; padding: 2rem; border-radius: 8px; border-left: 5px solid var(--logo-yellow);">
+                    <h3 style="color: var(--logo-yellow); margin-bottom: 1rem; font-size: 1.4rem; text-shadow: 0px 0px 1px rgba(0,0,0,0.2);">Nossa Visão</h3>
+                    <p style="font-size: 1.05rem; color: var(--text-light); margin: 0; text-align: justify;">
+                        Transformar vidas através do cuidado em rede, garantindo que nenhuma família caminhe sozinha durante ou após o diagnóstico. Ser referência no engajamento da sociedade para a conscientização sobre a neurodiversidade e a inclusão efetiva.
+                    </p>
+                </div>
+            </div>
+
+            <div style="text-align: left;">
+                <h3 style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.4rem; text-align: center;">Nossos Valores</h3>
+                
+                <!-- 3 cartões em cima, 2 centralizados embaixo -->
+                <div class="flex-centered-5">
+                    <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-top: 4px solid var(--logo-red);">
+                        <strong style="color: var(--primary-color); display: block; font-size: 1.1rem; margin-bottom: 0.5rem;">Cuidado em Rede</strong>
+                        <span style="font-size: 0.95rem; color: var(--text-light); display: block; text-align: justify;">Fortalecimento constante dos vínculos e da rede de apoio entre mães, familiares e a equipe técnica multidisciplinar.</span>
+                    </div>
+
+                    <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-top: 4px solid var(--logo-yellow);">
+                        <strong style="color: var(--primary-color); display: block; font-size: 1.1rem; margin-bottom: 0.5rem;">Acolhimento e Escuta</strong>
+                        <span style="font-size: 0.95rem; color: var(--text-light); display: block; text-align: justify;">Manutenção de um espaço seguro de escuta e suporte emocional, visando aliviar sobrecargas e empoderar as famílias para os desafios diários.</span>
+                    </div>
+
+                    <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-top: 4px solid var(--logo-green);">
+                        <strong style="color: var(--primary-color); display: block; font-size: 1.1rem; margin-bottom: 0.5rem;">Respeito à Diversidade</strong>
+                        <span style="font-size: 0.95rem; color: var(--text-light); display: block; text-align: justify;">A convicção de que a diversidade é a nossa maior força e de que a verdadeira inclusão se constrói com respeito, amor e empatia.</span>
+                    </div>
+
+                    <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-top: 4px solid var(--primary-color);">
+                        <strong style="color: var(--primary-color); display: block; font-size: 1.1rem; margin-bottom: 0.5rem;">Desenvolvimento e Autonomia</strong>
+                        <span style="font-size: 0.95rem; color: var(--text-light); display: block; text-align: justify;">Compromisso em fornecer ferramentas para a evolução motora, cognitiva, de linguagem e a independência nas atividades da vida diária das crianças.</span>
+                    </div>
+
+                    <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-top: 4px solid var(--logo-red);">
+                        <strong style="color: var(--primary-color); display: block; font-size: 1.1rem; margin-bottom: 0.5rem;">Acolhimento Integral e Equidade</strong>
+                        <span style="font-size: 0.95rem; color: var(--text-light); display: block; text-align: justify;">Acolher os sujeitos integralmente, em suas integralidades: entender as particularidades de cada criança, adolescente e famílias e promover equidade no cuidado.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Atendimentos -->
+        <section id="equipe" class="about-section" style="margin-bottom: 4rem; background: #F0F4F8; border-left: 5px solid var(--primary-color);">
+            <h2 class="section-title" style="margin-bottom: 1.5rem;">Atendimentos Especializados</h2>
+            <p style="font-size: 1.1rem; color: var(--text-main); margin-bottom: 1.5rem; text-align: justify;">
+                Os atendimentos especializados da Ameca acontecem de modo individual, garantindo uma abordagem focada nas necessidades particulares de cada criança. Contamos com um time técnico altamente qualificado composto por:
+            </p>
+            
+            <!-- 3 cartões em cima, 2 centralizados embaixo -->
+            <div class="flex-centered-5" style="margin-top: 1.5rem;">
+                <div style="background: white; padding: 1.2rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-bottom: 3px solid var(--logo-red);">
+                    <strong style="color: var(--primary-color); display: block; font-size: 1.1rem;">Assistente Social</strong>
+                    <span style="font-size: 0.9rem; color: var(--text-light);">Acolhimento e direitos</span>
+                </div>
+                <div style="background: white; padding: 1.2rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-bottom: 3px solid var(--logo-yellow);">
+                    <strong style="color: var(--primary-color); display: block; font-size: 1.1rem;">Fonoaudióloga</strong>
+                    <span style="font-size: 0.9rem; color: var(--text-light);">Linguagem e comunicação</span>
+                </div>
+                <div style="background: white; padding: 1.2rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-bottom: 3px solid var(--logo-green);">
+                    <strong style="color: var(--primary-color); display: block; font-size: 1.1rem;">Psicólogas</strong>
+                    <span style="font-size: 0.9rem; color: var(--text-light);">Suporte emocional e comportamental</span>
+                </div>
+                <div style="background: white; padding: 1.2rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-bottom: 3px solid var(--primary-color);">
+                    <strong style="color: var(--primary-color); display: block; font-size: 1.1rem;">Psicopedagogos</strong>
+                    <span style="font-size: 0.9rem; color: var(--text-light);">Aprendizagem e desenvolvimento</span>
+                </div>
+                <div style="background: white; padding: 1.2rem; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-bottom: 3px solid var(--logo-red);">
+                    <strong style="color: var(--primary-color); display: block; font-size: 1.1rem;">Psicomotricista</strong>
+                    <span style="font-size: 0.9rem; color: var(--text-light);">Evolução motora e corporal</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção Cuidado em Rede -->
+        <section id="atividades" class="about-section" style="margin-bottom: 4rem;">
+            <h2 class="section-title" style="margin-bottom: 1.5rem;">Cuidado em Rede: Famílias e Coletividade</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; text-align: left;">
+                <div>
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.3rem;">Rodas de Conversa e Orientação</h3>
+                    <p style="font-size: 1.05rem; color: var(--text-light); margin: 0; text-align: justify;">
+                        O cuidado em rede se estende às mães e responsáveis através de <strong>rodas de conversa e encontros de orientação</strong>. Esses momentos oferecem um espaço seguro de escuta, acolhimento emocional e troca de experiências, fortalecendo a rede de apoio, aliviando sobrecargas e empoderando as famílias para os desafios diários da inclusão.
+                    </p>
+                </div>
+                <div>
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.3rem;">Atividades Coletivas</h3>
+                    <p style="font-size: 1.05rem; color: var(--text-light); margin: 0; text-align: justify;">
+                        As <strong>atividades coletivas</strong> são pensadas para promover a socialização e o aprendizado mútuo entre as crianças. Em um ambiente lúdico e mediado, elas desenvolvem habilidades sociais, empatia e o senso de pertencimento, mostrando que a diversidade é a nossa maior força.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfólio -->
+        <div style="text-align: center;">
+            <h2 class="section-title">Quadro de Atividades Realizadas</h2>
+        </div>
+        
+        <div class="gallery-grid">
+            
+            <div class="gallery-item">
+                <div class="img-container">
+                    <img src="foto1.jpeg" alt="Exploração sensorial">
+                </div>
+                <div class="item-caption">
+                    <h3 class="item-title">1. Exploração sensorial</h3>
+                    <p class="item-desc">Atividades que utilizam diferentes texturas e elementos da natureza estimulam a criatividade, o processamento sensorial e a conexão tátil das crianças durante as sessões.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-container">
+                    <img src="foto2.jpeg" alt="Acessibilidade">
+                </div>
+                <div class="item-caption">
+                    <h3 class="item-title">2. Acessibilidade</h3>
+                    <p class="item-desc">O ambiente é totalmente adaptado para as necessidades de autorregulação. O uso de recursos, como abafadores de ruído, garante o conforto térmico e acústico necessário para o foco nas tarefas.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-container">
+                    <img src="foto3.jpeg" alt="Apoio em Rede e formação de cuidadores">
+                </div>
+                <div class="item-caption">
+                    <h3 class="item-title">3. Apoio em Rede e formação de cuidadores</h3>
+                    <p class="item-desc">Integração em espaços coletivos sob mediação técnica, oferecendo escuta qualificada, orientação e fortalecimento de vínculos para mães e cuidadores no processo de acompanhamento.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-container">
+                    <img src="foto4.jpeg" alt="Desenvolvimento de coordenação motora">
+                </div>
+                <div class="item-caption">
+                    <h3 class="item-title">4. Desenvolvimento de coordenação motora</h3>
+                    <p class="item-desc">Exercícios direcionados, recortes, colagens e dinâmicas corporais essenciais para a evolução cognitiva, aprimoramento do equilíbrio, planejamento motor e autonomia nas atividades diárias.</p>
+                </div>
+            </div>
+
+             <div class="gallery-item">
+                <div class="img-container">
+                    <img src="foto5.jpeg" alt="Neurodiversidade e inclusão">
+                </div>
+                <div class="item-caption">
+                    <h3 class="item-title">5. Neurodiversidade e inclusão</h3>
+                    <p class="item-desc">Promovemos o orgulho e a conscientização sobre a diversidade neurodivergente, reforçando a mensagem fundamental de que a inclusão efetiva se faz com respeito e amor na comunidade.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-container">
+                    <img src="foto6.jpeg" alt="Acompanhamento individualizado">
+                </div>
+                <div class="item-caption">
+                    <h3 class="item-title">6. Acompanhamento individualizado</h3>
+                    <p class="item-desc">Momentos dedicados em sessões onde as particularidades e ritmos de cada criança são respeitados, com estímulos e abordagens adequadas a cada etapa do seu desenvolvimento pessoal.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-container">
+                    <img src="foto7.jpeg" alt="Roda de conversa com as famílias e integração sociocomunitária">
+                </div>
+                <div class="item-caption">
+                    <h3 class="item-title">7. Roda de conversa com as famílias e integração sociocomunitária</h3>
+                    <p class="item-desc">Encontros periódicos para fortalecer a rede de apoio familiar, alinhados a ações de engajamento para a conscientização da sociedade de Poço Branco sobre a inclusão.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-container">
+                    <img src="foto8.jpeg" alt="Atendimento e orientação com especialidades">
+                </div>
+                <div class="item-caption">
+                    <h3 class="item-title">8. Atendimento e orientação com especialidades</h3>
+                    <p class="item-desc">Intervenções direcionadas e reuniões da equipe técnica para alinhar diagnósticos e estabelecer metas conjuntas para o desenvolvimento global de cada criança.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-container">
+                    <img src="foto9.jpeg" alt="Estimulação cognitiva">
+                </div>
+                <div class="item-caption">
+                    <h3 class="item-title">9. Estimulação cognitiva</h3>
+                    <p class="item-desc">Atividades focadas no desenvolvimento da memória, atenção sustentada e raciocínio lógico através de desafios, dinâmicas estruturadas e recursos adequados à faixa etária.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-container">
+                    <img src="foto10.jpeg" alt="Acompanhamento psicopedagógico">
+                </div>
+                <div class="item-caption">
+                    <h3 class="item-title">10. Acompanhamento psicopedagógico</h3>
+                    <p class="item-desc">Utilização de recursos lúdicos e materiais concretos adaptados para facilitar a assimilação de conceitos essenciais, superação de desafios escolares e facilitação do aprendizado.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-container">
+                    <img src="foto11.jpeg" alt="Atendimento fonoaudiológico e estimulação da comunicação">
+                </div>
+                <div class="item-caption">
+                    <h3 class="item-title">11. Atendimento fonoaudiológico e estimulação da comunicação</h3>
+                    <p class="item-desc">Práticas guiadas pela equipe para a ampliação do vocabulário, implementação de comunicação alternativa e desenvolvimento fluido da linguagem verbal e não verbal.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="img-container">
+                    <img src="foto12.jpeg" alt="Treino de habilidades sociais e fortalecimento socioemocional">
+                </div>
+                <div class="item-caption">
+                    <h3 class="item-title">12. Treino de habilidades sociais e fortalecimento socioemocional</h3>
+                    <p class="item-desc">Interações em grupo preparadas para trabalhar a empatia, o compartilhamento e painéis interativos que reforçam diariamente afirmações de valor e autoestima na criança.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <section class="cta-section">
+            <h2>Faça Parte da Nossa Rede</h2>
+            <p>A transformação que realizamos diariamente em Poço Branco só é possível graças à força da nossa comunidade. Junte-se a nós na construção de um futuro mais inclusivo.</p>
+            <a href="https://wa.me/5584996394639" class="cta-button" target="_blank">Seja você também um apoiador</a>
+        </section>
+
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <img src="logo.jpg" alt="Ameca" class="footer-logo">
+                <p style="font-size: 0.95rem; line-height: 1.5; color: #E2E8F0;">O Cuidado em Rede<br>Transformando Vidas</p>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="#sobre">Sobre nós</a></li>
+                    <li><a href="#equipe">Equipe Multidisciplinar</a></li>
+                    <li><a href="#atividades">Quadro de Atividades</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <ul>
+                    <li><a href="https://wa.me/5584996394639" target="_blank">WhatsApp: (84) 99639-4639</a></li>
+                    <li><a href="https://instagram.com/ameca_pb" target="_blank">Instagram: @ameca_pb</a></li>
+                    <li>Endereço: Poço Branco, RN</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Ameca - Associação de Mães Atípicas de Poço Branco RN. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
